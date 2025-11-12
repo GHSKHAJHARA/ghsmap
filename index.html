@@ -3,16 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rajkiya High School Khajhara - Map</title>
+  <title>G.H.S. Khajhara Location</title>
   <style>
-    html, body {
+    body, html {
       height: 100%;
       margin: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: Arial, sans-serif;
     }
     #map {
-      height: 100vh;
+      height: 100vh; /* Full screen map */
       width: 100%;
+    }
+    .map-info {
+      font-size: 16px;
+      line-height: 1.4;
     }
   </style>
 </head>
@@ -21,41 +25,54 @@
 
   <script>
     function initMap() {
-      const school = { lat: 25.3721786, lng: 83.4162328 }; // Rajkiya High School Khajhara
+      // School coordinates
+      const schoolLocation = { lat: 25.3721786, lng: 83.4162328 }; // Replace with actual coordinates
+
+      // Map initialization
       const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 16,
-        center: school,
+        center: schoolLocation,
+        // Optional custom styles
+        styles: [
+          {
+            featureType: "poi",
+            stylers: [{ visibility: "off" }]
+          },
+          {
+            featureType: "transit",
+            stylers: [{ visibility: "off" }]
+          }
+        ]
       });
 
+      // Marker
       const marker = new google.maps.Marker({
-        position: school,
+        position: schoolLocation,
         map: map,
-        title: "Rajkiya High School Khajhara",
+        title: "G.H.S. Khajhara"
       });
 
+      // Info window
       const infoWindow = new google.maps.InfoWindow({
         content: `
-          <div style="font-family:Poppins; text-align:center;">
-            <h3 style="margin:4px 0;">Rajkiya High School Khajhara</h3>
-            <p style="margin:2px 0;">Chandauli, Uttar Pradesh</p>
-            <a href="https://maps.app.goo.gl/2T83f82UK9JpoBfs7" target="_blank" style="color:#1a73e8; text-decoration:none;">
-              📍 View Larger Map
-            </a>
+          <div class="map-info">
+            <strong>G.H.S. Khajhara</strong><br>
+            Khajhara Chandouli, Uttar Pradesh<br>
+            Contact: +91-XXXXXXXXXX
           </div>
-        `,
+        `
       });
 
+      // Open info window on marker click
       marker.addListener("click", () => {
         infoWindow.open(map, marker);
       });
-
-      // Open info window by default
-      infoWindow.open(map, marker);
     }
   </script>
 
+  <!-- Replace YOUR_API_KEY with restricted API key -->
   <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlfCaVygPLofg0i-4meSDDdNE7-MzCoSw&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADhahbHQNnt4nWoUTEt9AIP4Ja0d_Coto&callback=initMap">
   </script>
 </body>
 </html>
